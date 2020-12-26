@@ -4,8 +4,12 @@ import tat.mukhutdinov.scalablesolutions.asset.domain.model.Asset
 import tat.mukhutdinov.scalablesolutions.asset.gateway.boundary.AssetApi
 import tat.mukhutdinov.scalablesolutions.asset.gateway.converter.AssetConverter
 import tat.mukhutdinov.scalablesolutions.assetsList.domain.boundary.AssetsListGateway
+import javax.inject.Inject
 
-class AssertsListRemoteGateway(private val api: AssetApi, private val converter: AssetConverter) : AssetsListGateway {
+class AssetsListRemoteGateway @Inject constructor(
+    private val api: AssetApi,
+    private val converter: AssetConverter
+) : AssetsListGateway {
 
     override suspend fun getAssetsList(): List<Asset> {
         val response = api.fetchAssetsList()

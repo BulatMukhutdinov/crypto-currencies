@@ -2,18 +2,21 @@ package tat.mukhutdinov.scalablesolutions.assetsList.ui
 
 import android.os.Bundle
 import android.view.View
-import tat.mukhutdinov.android.structure.StructureFragment
-import tat.mukhutdinov.scalablesolutions.assetsList.ui.boundary.AssetsListViewModel
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import tat.mukhutdinov.scalablesolutions.databinding.AssetsListBinding
-import tat.mukhutdinov.android.structure.viewModel
+import tat.mukhutdinov.scalablesolutions.infrastructure.structure.ui.BaseFragment
 
-class AssetsListFragment : StructureFragment<AssetsListBinding>() {
+@AndroidEntryPoint
+class AssetsListFragment : BaseFragment<AssetsListBinding>() {
 
-    override val viewModel: AssetsListViewModel by viewModel()
+    override val viewModel: AssetsListViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel
+        viewModel.navigation.observe(viewLifecycleOwner) {
+            navigate(it)
+        }
     }
 }

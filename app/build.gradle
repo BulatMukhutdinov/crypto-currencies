@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -44,6 +45,7 @@ android {
 
     kapt {
         useBuildCache true
+        correctErrorTypes true
     }
 
     buildFeatures {
@@ -62,8 +64,15 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
-    implementation 'com.github.bulatmukhutdinov:structure:1.0.0'
+    implementation 'com.github.bulatmukhutdinov:utils:1.2.0'
 
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+
+    // Paging
     def paging_version = "3.0.0-alpha11"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
@@ -73,12 +82,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
-    // Koin
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-android-viewmodel:$koin_version"
-    implementation "org.koin:koin-android-ext:$koin_version"
-
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //Utils
+    implementation "com.jakewharton.timber:timber:4.7.1"
 }

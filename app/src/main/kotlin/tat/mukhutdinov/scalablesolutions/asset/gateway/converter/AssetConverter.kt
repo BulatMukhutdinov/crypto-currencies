@@ -5,8 +5,9 @@ import tat.mukhutdinov.scalablesolutions.asset.domain.model.OfficialLink
 import tat.mukhutdinov.scalablesolutions.asset.gateway.dto.AssetDto
 import tat.mukhutdinov.scalablesolutions.asset.gateway.dto.AssetProfileGeneralOverviewOfficialLinkDto
 import java.math.BigDecimal
+import javax.inject.Inject
 
-class AssetConverter {
+class AssetConverter @Inject constructor() {
 
     fun convert(dto: AssetDto): Asset =
         Asset(

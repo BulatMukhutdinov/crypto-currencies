@@ -2,7 +2,7 @@ package tat.mukhutdinov.scalablesolutions.asset.gateway.boundary
 
 import retrofit2.http.GET
 import tat.mukhutdinov.scalablesolutions.asset.gateway.dto.AssetDto
-import tat.mukhutdinov.scalablesolutions.infrastructure.gateway.dto.BaseDto
+import tat.mukhutdinov.scalablesolutions.infrastructure.structure.gateway.dto.BaseDto
 
 interface AssetApi {
 

@@ -11,5 +11,16 @@
         android:label="Assets List"
         tools:layout="@layout/assets_list">
 
+        <action
+            android:id="@+id/toAsset"
+            app:destination="@id/asset" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/asset"
+        android:name="tat.mukhutdinov.scalablesolutions.asset.ui.AssetFragment"
+        android:label="Asset"
+        tools:layout="@layout/asset">
+
     </fragment>
 </navigation>

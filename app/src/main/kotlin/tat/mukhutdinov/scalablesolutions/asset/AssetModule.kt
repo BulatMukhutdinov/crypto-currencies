@@ -1,25 +1,35 @@
 package tat.mukhutdinov.scalablesolutions.asset
 
-import org.koin.dsl.module
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import retrofit2.Retrofit
-import tat.mukhutdinov.android.structure.viewModel
+import tat.mukhutdinov.scalablesolutions.asset.domain.AssetInteractor
+import tat.mukhutdinov.scalablesolutions.asset.domain.boundary.AssetDomain
+import tat.mukhutdinov.scalablesolutions.asset.domain.boundary.AssetGateway
+import tat.mukhutdinov.scalablesolutions.asset.gateway.AssetRemoteGateway
 import tat.mukhutdinov.scalablesolutions.asset.gateway.boundary.AssetApi
-import tat.mukhutdinov.scalablesolutions.asset.gateway.converter.AssetConverter
-import tat.mukhutdinov.scalablesolutions.assetsList.ui.AssetsListRetainedViewModel
-import tat.mukhutdinov.scalablesolutions.assetsList.ui.boundary.AssetsListViewModel
 
-object AssetModule {
+@Module
+@InstallIn(ApplicationComponent::class)
+abstract class AssetsListModule {
 
-    val module = module {
+    @Binds
+    abstract fun bindAssetGateway(
+        gateway: AssetRemoteGateway
+    ): AssetGateway
 
-        factory {
-            val retrofit: Retrofit = get()
+    @Binds
+    abstract fun bindAssetDomain(
+        interactor: AssetInteractor
+    ): AssetDomain
 
+    companion object {
+
+        @Provides
+        fun provideAssetApi(retrofit: Retrofit): AssetApi =
             retrofit.create(AssetApi::class.java)
-        }
-
-        factory {
-            AssetConverter()
-        }
     }
 }

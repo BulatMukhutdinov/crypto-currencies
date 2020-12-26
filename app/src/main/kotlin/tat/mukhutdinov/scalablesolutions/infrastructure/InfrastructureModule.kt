@@ -1,37 +1,40 @@
 package tat.mukhutdinov.scalablesolutions.infrastructure
 
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import tat.mukhutdinov.android.structure.Dispatchers
-import tat.mukhutdinov.scalablesolutions.infrastructure.util.AppDispatchers
+import javax.inject.Singleton
 
-object InfrastructureModule {
+@Module
+@InstallIn(ApplicationComponent::class)
+abstract class InfrastructureModule {
 
-    val module = module {
+    companion object {
 
-        single<Dispatchers> {
-            AppDispatchers()
-        }
-
-        single {
+        @Provides
+        @Singleton
+        fun provideOkHttpClient(): OkHttpClient {
             val logging = HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             }
 
-            OkHttpClient.Builder()
+            return OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .build()
         }
 
-        single {
+        @Provides
+        @Singleton
+        fun provideRetrofit(client: OkHttpClient): Retrofit =
             Retrofit.Builder()
                 .baseUrl("https://data.messari.io/")
-                .client(get())
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
                 .build()
-        }
     }
 }

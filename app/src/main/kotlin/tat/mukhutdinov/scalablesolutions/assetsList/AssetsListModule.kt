@@ -1,28 +1,25 @@
 package tat.mukhutdinov.scalablesolutions.assetsList
 
-import org.koin.dsl.module
-import tat.mukhutdinov.android.structure.viewModel
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import tat.mukhutdinov.scalablesolutions.assetsList.domain.AssetsListInteractor
 import tat.mukhutdinov.scalablesolutions.assetsList.domain.boundary.AssetsListDomain
 import tat.mukhutdinov.scalablesolutions.assetsList.domain.boundary.AssetsListGateway
-import tat.mukhutdinov.scalablesolutions.assetsList.gateway.AssertsListRemoteGateway
-import tat.mukhutdinov.scalablesolutions.assetsList.ui.AssetsListRetainedViewModel
-import tat.mukhutdinov.scalablesolutions.assetsList.ui.boundary.AssetsListViewModel
+import tat.mukhutdinov.scalablesolutions.assetsList.gateway.AssetsListRemoteGateway
 
-object AssetsListModule {
+@Module
+@InstallIn(ActivityComponent::class)
+abstract class AssetsListModule {
 
-    val module = module {
+    @Binds
+    abstract fun bindAssetsListDomain(
+        interactor: AssetsListInteractor
+    ): AssetsListDomain
 
-        viewModel<AssetsListViewModel> {
-            AssetsListRetainedViewModel(get())
-        }
-
-        factory<AssetsListGateway> {
-            AssertsListRemoteGateway(get(), get())
-        }
-
-        factory<AssetsListDomain> {
-            AssetsListInteractor(get())
-        }
-    }
+    @Binds
+    abstract fun bindAssetsListGateway(
+        gateway: AssetsListRemoteGateway
+    ): AssetsListGateway
 }

@@ -1,23 +1,21 @@
 package tat.mukhutdinov.scalablesolutions
 
 import android.app.Application
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
-import tat.mukhutdinov.scalablesolutions.infrastructure.di.Modules
+import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
+@HiltAndroidApp
 class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        setupKoin()
+        setupTimber()
     }
 
-    private fun setupKoin() {
-        startKoin {
-            androidContext(this@App)
-
-            modules(Modules.modules)
+    private fun setupTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
         }
     }
 }

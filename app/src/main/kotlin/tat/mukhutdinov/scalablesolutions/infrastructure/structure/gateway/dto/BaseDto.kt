@@ -1,4 +1,4 @@
-package tat.mukhutdinov.scalablesolutions.infrastructure.gateway.dto
+package tat.mukhutdinov.scalablesolutions.infrastructure.structure.gateway.dto
 
 import com.google.gson.annotations.SerializedName
 
