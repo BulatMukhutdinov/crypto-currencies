@@ -13,6 +13,10 @@
 
         <action
             android:id="@+id/toAsset"
+            app:enterAnim="@anim/rtl_nav_enter"
+            app:exitAnim="@anim/rtl_nav_exit"
+            app:popEnterAnim="@anim/rtl_nav_pop_enter"
+            app:popExitAnim="@anim/rtl_nav_pop_exit"
             app:destination="@id/asset" />
     </fragment>
 
@@ -22,5 +26,8 @@
         android:label="Asset"
         tools:layout="@layout/asset">
 
+        <argument
+            android:name="asset"
+            app:argType="tat.mukhutdinov.scalablesolutions.asset.domain.model.Asset" />
     </fragment>
 </navigation>
