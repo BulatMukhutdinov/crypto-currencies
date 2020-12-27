@@ -9,6 +9,4 @@ import tat.mukhutdinov.scalablesolutions.infrastructure.structure.ui.BaseFragmen
 class AssetFragment : BaseFragment<AssetBinding>() {
 
     override val viewModel: AssetViewModel by viewModels()
-
-
 }

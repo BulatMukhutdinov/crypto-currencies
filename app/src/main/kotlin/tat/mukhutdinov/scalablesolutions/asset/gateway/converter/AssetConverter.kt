@@ -5,6 +5,8 @@ import tat.mukhutdinov.scalablesolutions.asset.domain.model.OfficialLink
 import tat.mukhutdinov.scalablesolutions.asset.gateway.dto.AssetDto
 import tat.mukhutdinov.scalablesolutions.asset.gateway.dto.AssetProfileGeneralOverviewOfficialLinkDto
 import java.math.BigDecimal
+import java.text.NumberFormat
+import java.util.Locale
 import javax.inject.Inject
 
 class AssetConverter @Inject constructor() {
@@ -14,11 +16,17 @@ class AssetConverter @Inject constructor() {
             id = dto.id ?: "",
             name = dto.name ?: "",
             symbol = dto.symbol ?: "",
-            priceUsd = BigDecimal(dto.metrics?.marketData?.priceUsd ?: "0"),
+            priceUsd = convertPriceUsd(dto.metrics?.marketData?.priceUsd),
             tagline = dto.profile?.general?.overview?.tagline ?: "",
             projectDetails = dto.profile?.general?.overview?.projectDetails ?: "",
             officialLinks = dto.profile?.general?.overview?.officialLinks?.map(::convert) ?: emptyList()
         )
+
+    private fun convertPriceUsd(priceUsdDto: String?): String {
+        val price = BigDecimal(priceUsdDto ?: "0")
+
+        return "$${NumberFormat.getNumberInstance(Locale.getDefault()).format(price)}"
+    }
 
     private fun convert(dto: AssetProfileGeneralOverviewOfficialLinkDto): OfficialLink =
         OfficialLink(

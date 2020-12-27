@@ -10,7 +10,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import tat.mukhutdinov.android.utils.autoCleared
 import tat.mukhutdinov.scalablesolutions.BR
-import tat.mukhutdinov.scalablesolutions.infrastructure.structure.ui.BaseViewModel.Companion.BUNDLE_ARGS
+import tat.mukhutdinov.scalablesolutions.infrastructure.structure.ui.BaseViewModel.Companion.BUNDLE_NAV_ARG
 import timber.log.Timber
 import java.lang.reflect.ParameterizedType
 
@@ -54,10 +54,12 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding> : Fragment() {
     }
 
     override fun setArguments(args: Bundle?) {
-        args?.apply {
-            putBundle(BUNDLE_ARGS, args)
+        val navArgs = args?.let {
+            Bundle(it).apply {
+                putBundle(BUNDLE_NAV_ARG, args)
+            }
         }
 
-        super.setArguments(args)
+        super.setArguments(navArgs)
     }
 }

@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Scalable Solutions</string>
     <string name="assets_list_symbol">[%1$s]</string>
-    <string name="retry">Retry</string>
+    <string name="assets_list_retry">Retry</string>
 </resources>

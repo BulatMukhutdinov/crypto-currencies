@@ -48,7 +48,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:onClick="@{() -> bindings.onRetryClicked()}"
-            android:text="@string/retry"
+            android:text="@string/assets_list_retry"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

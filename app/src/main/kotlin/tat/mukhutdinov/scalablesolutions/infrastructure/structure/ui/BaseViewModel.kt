@@ -23,7 +23,7 @@ abstract class BaseViewModel(
 
     override val coroutineContext: CoroutineContext = SupervisorJob() + kotlinx.coroutines.Dispatchers.IO + exceptionHandler
 
-    val arguments by lazy { savedStateHandle.get<Bundle>(BUNDLE_ARGS) }
+    val arguments by lazy { savedStateHandle.get<Bundle>(BUNDLE_NAV_ARG) }
 
     open fun handleCoroutineException(context: CoroutineContext, throwable: Throwable) {
         Timber.e(throwable)
@@ -41,6 +41,6 @@ abstract class BaseViewModel(
     }
 
     companion object {
-        const val BUNDLE_ARGS = "bundle_args"
+        const val BUNDLE_NAV_ARG = "bundle_nav_arg"
     }
 }
