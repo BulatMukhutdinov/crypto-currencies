@@ -1,14 +1,23 @@
 package tat.mukhutdinov.scalablesolutions.asset.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.google.android.material.chip.Chip
+import com.google.android.material.color.MaterialColors
 import dagger.hilt.android.AndroidEntryPoint
+import tat.mukhutdinov.scalablesolutions.R
 import tat.mukhutdinov.scalablesolutions.asset.domain.model.OfficialLink
+import tat.mukhutdinov.scalablesolutions.asset.ui.chart.DateFormatter
+import tat.mukhutdinov.scalablesolutions.asset.ui.chart.PriceMarkerView
 import tat.mukhutdinov.scalablesolutions.databinding.AssetBinding
 import tat.mukhutdinov.scalablesolutions.infrastructure.structure.ui.BaseFragment
 
@@ -20,8 +29,65 @@ class AssetFragment : BaseFragment<AssetBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewBinding.details.movementMethod = LinkMovementMethod.getInstance();
+        viewBinding.details.movementMethod = LinkMovementMethod.getInstance()
 
+        setupLinks()
+
+        setupTimeSeries()
+    }
+
+    private fun setupTimeSeries() {
+        with(viewBinding.timeSeries) {
+            isDragEnabled = true
+            legend.isEnabled = false
+            description.isEnabled = false
+            axisRight.isEnabled = false
+
+            setDrawGridBackground(false)
+            setScaleEnabled(true)
+            xAxis.valueFormatter = DateFormatter()
+
+            val textColor = MaterialColors.getColor(requireContext(), R.attr.colorText, Color.BLACK)
+            xAxis.textColor = textColor
+            axisLeft.textColor = textColor
+
+            val markerView = PriceMarkerView(context, R.layout.asset_chart_marker)
+            markerView.chartView = this
+            marker = markerView
+        }
+
+        observeEntries()
+    }
+
+    private fun observeEntries() {
+        viewModel.timeSeries.observe(viewLifecycleOwner) {
+            val entries = mutableListOf<Entry>()
+
+            it.forEach { timeSeries ->
+                entries.add(Entry(timeSeries.date, timeSeries.price))
+            }
+
+            viewBinding.timeSeries.data = createLineData(entries)
+
+            viewBinding.progress.hide()
+            viewBinding.timeSeries.isVisible = true
+
+            viewBinding.timeSeries.invalidate()
+        }
+    }
+
+    private fun createLineData(entries: List<Entry>): LineData {
+        val dataSet = LineDataSet(entries, "")
+
+        dataSet.color = MaterialColors.getColor(requireContext(), R.attr.colorSecondary, Color.BLACK)
+        dataSet.setCircleColor(MaterialColors.getColor(requireContext(), R.attr.colorSecondaryVariant, Color.BLACK))
+        dataSet.setDrawCircleHole(false)
+        dataSet.setDrawValues(false)
+
+        return LineData(dataSet)
+    }
+
+    private fun setupLinks() {
         viewModel.asset.officialLinks.forEach {
             addLink(it)
         }
