@@ -7,13 +7,13 @@ import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.liveData
 import tat.mukhutdinov.scalablesolutions.asset.domain.model.Asset
-import tat.mukhutdinov.scalablesolutions.asset.gateway.boundary.AssetApi
 import tat.mukhutdinov.scalablesolutions.asset.gateway.converter.AssetConverter
 import tat.mukhutdinov.scalablesolutions.assetsList.domain.boundary.AssetsListGateway
+import tat.mukhutdinov.scalablesolutions.assetsList.gateway.boundary.AssetsListApi
 import javax.inject.Inject
 
 class AssetsListRemoteGateway @Inject constructor(
-    private val api: AssetApi,
+    private val api: AssetsListApi,
     private val converter: AssetConverter
 ) : AssetsListGateway, PagingSource<Int, Asset>() {
 

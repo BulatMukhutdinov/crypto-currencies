@@ -23,7 +23,8 @@ abstract class BaseViewModel(
 
     override val coroutineContext: CoroutineContext = SupervisorJob() + kotlinx.coroutines.Dispatchers.IO + exceptionHandler
 
-    val arguments by lazy { savedStateHandle.get<Bundle>(BUNDLE_NAV_ARG) }
+    val arguments
+        get() = savedStateHandle.get<Bundle>(BUNDLE_NAV_ARG)
 
     open fun handleCoroutineException(context: CoroutineContext, throwable: Throwable) {
         Timber.e(throwable)

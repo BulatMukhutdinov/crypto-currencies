@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "tat.mukhutdinov.scalablesolutions"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -87,4 +87,5 @@ dependencies {
 
     //Utils
     implementation "com.jakewharton.timber:timber:4.7.1"
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

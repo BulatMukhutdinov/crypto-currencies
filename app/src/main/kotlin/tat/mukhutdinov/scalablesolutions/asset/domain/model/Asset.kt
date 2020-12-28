@@ -1,8 +1,9 @@
 package tat.mukhutdinov.scalablesolutions.asset.domain.model
 
 import android.os.Parcelable
+import android.text.Html
+import android.text.Spanned
 import kotlinx.android.parcel.Parcelize
-import java.math.BigDecimal
 
 @Parcelize
 data class Asset(
@@ -13,7 +14,11 @@ data class Asset(
     val tagline: String,
     val projectDetails: String,
     val officialLinks: List<OfficialLink>
-) : Parcelable
+) : Parcelable {
+
+    val projectDetailsWithHtml: Spanned
+        get() = Html.fromHtml(projectDetails, Html.FROM_HTML_MODE_COMPACT)
+}
 
 @Parcelize
 data class OfficialLink(
