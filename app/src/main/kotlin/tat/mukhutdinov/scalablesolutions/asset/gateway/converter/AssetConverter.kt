@@ -11,7 +11,7 @@ import java.text.NumberFormat
 import java.util.Locale
 import javax.inject.Inject
 
-class AssetConverter @Inject constructor() {
+class AssetConverter @Inject constructor(private val numberFormat: NumberFormat) {
 
     fun convert(dto: AssetTimeSeriesDto): List<AssetTimeSeries> {
         val values = dto.values ?: emptyList()
@@ -43,7 +43,7 @@ class AssetConverter @Inject constructor() {
     private fun convertPriceUsd(priceUsdDto: String?): String {
         val price = BigDecimal(priceUsdDto ?: "0")
 
-        return "$${NumberFormat.getNumberInstance(Locale.getDefault()).format(price)}"
+        return "$${numberFormat.format(price)}"
     }
 
     private fun convert(dto: AssetProfileGeneralOverviewOfficialLinkDto): OfficialLink =

@@ -139,7 +139,7 @@
                 tools:text="Bitcoin is the first distributed consensus-based, censorship-resistant, permissionless, peer-to-peer payment settlement network with a provably scarce, programmable, native currency. Bitcoin (BTC), the native asset of the Bitcoin blockchain, is the world's first digital currency without a central bank or administrator. The Bitcoin network is an emergent decentralized monetary institution that exists through the interplay between full nodes, miners, and developers. It is set by a social contract that is created and opted into by the users of the network and hardened through game theory and cryptography. Bitcoin is the first, oldest, and largest cryptocurrency in the world." />
 
             <androidx.core.widget.ContentLoadingProgressBar
-                android:id="@+id/progress"
+                android:id="@+id/loading"
                 style="@style/Widget.AppCompat.ProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -147,6 +147,33 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details" />
+
+            <include
+                android:id="@+id/error"
+                layout="@layout/error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:bindings="@{bindings.errorBindings}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details" />
+
+            <TextView
+                android:id="@+id/emptyTimeSeries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/asset_empty_time_series"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/details" />
 

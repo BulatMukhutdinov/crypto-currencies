@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -14,44 +14,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/message"
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/error"
+            layout="@layout/error"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:textSize="18sp"
-            app:layout_constrainedWidth="true"
+            android:layout_marginBottom="16dp"
+            app:bindings="@{bindings.errorBindings}"
+            app:layout_constraintBottom_toTopOf="@id/progress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Failed to load data" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:indeterminate="true"
-            app:layout_constraintBottom_toTopOf="@id/retry"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/message" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/retry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:onClick="@{() -> bindings.onRetryClicked()}"
-            android:text="@string/assets_list_retry"
+            app:layout_goneMarginTop="16dp"
+            android:indeterminate="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progress" />
+            app:layout_constraintTop_toBottomOf="@id/error" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

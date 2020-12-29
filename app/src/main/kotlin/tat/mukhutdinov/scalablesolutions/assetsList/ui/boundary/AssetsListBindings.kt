@@ -1,10 +1,11 @@
 package tat.mukhutdinov.scalablesolutions.assetsList.ui.boundary
 
 import tat.mukhutdinov.scalablesolutions.asset.domain.model.Asset
+import tat.mukhutdinov.scalablesolutions.infrastructure.structure.ui.boundary.ErrorBindings
 
 interface AssetsListBindings {
 
-    fun onAssetClicked(asset: Asset)
+    val errorBindings: ErrorBindings
 
-    fun onRetryClicked()
+    fun onAssetClicked(asset: Asset)
 }

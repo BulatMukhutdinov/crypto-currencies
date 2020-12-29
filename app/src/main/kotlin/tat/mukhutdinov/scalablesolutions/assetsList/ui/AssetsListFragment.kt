@@ -56,11 +56,10 @@ class AssetsListFragment : BaseFragment<AssetsListBinding>() {
             // Show the retry state if initial load or refresh fails.
             val refresh = loadState.source.refresh
 
-            viewBinding.retry.isVisible = refresh is LoadState.Error
-            viewBinding.message.isVisible = refresh is LoadState.Error
+            viewBinding.error.container.isVisible = refresh is LoadState.Error
 
             if (refresh is LoadState.Error) {
-                viewBinding.message.text = refresh.error.localizedMessage
+                viewBinding.error.message.text = refresh.error.localizedMessage
             }
         }
 

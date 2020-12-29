@@ -2,4 +2,6 @@
     <string name="app_name">Scalable Solutions</string>
     <string name="assets_list_symbol">[%1$s]</string>
     <string name="assets_list_retry">Retry</string>
+
+    <string name="asset_empty_time_series">No time series available for last month</string>
 </resources>

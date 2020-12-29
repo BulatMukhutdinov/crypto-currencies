@@ -19,11 +19,10 @@ class AssetsListLoadStateViewHolder(
         viewBinding.bindings = bindings
 
         if (loadState is LoadState.Error) {
-            viewBinding.message.text = loadState.error.localizedMessage
+            viewBinding.error.message.text = loadState.error.localizedMessage
         }
 
-        viewBinding.retry.isVisible = loadState !is LoadState.Loading
-        viewBinding.message.isVisible = loadState !is LoadState.Loading
+        viewBinding.error.container.isVisible = loadState !is LoadState.Loading
 
         if (loadState is LoadState.Loading) {
             viewBinding.progress.show()

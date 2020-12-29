@@ -14,6 +14,7 @@ import tat.mukhutdinov.scalablesolutions.assetsList.ui.boundary.AssetsListBindin
 import tat.mukhutdinov.scalablesolutions.assetsList.ui.recycler.AssetsListAdapter
 import tat.mukhutdinov.scalablesolutions.assetsList.ui.recycler.AssetsListLoadStateAdapter
 import tat.mukhutdinov.scalablesolutions.infrastructure.structure.ui.BaseViewModel
+import tat.mukhutdinov.scalablesolutions.infrastructure.structure.ui.boundary.ErrorBindings
 
 class AssetsListViewModel @ViewModelInject constructor(
     domain: AssetsListDomain,
@@ -26,6 +27,10 @@ class AssetsListViewModel @ViewModelInject constructor(
 
     private var adapter: AssetsListAdapter? = null
 
+    override val errorBindings = ErrorBindings {
+        adapter?.retry()
+    }
+
     fun createAssetsListAdapter(): AssetsListAdapter =
         AssetsListAdapter(this).also {
             adapter = it
@@ -36,9 +41,5 @@ class AssetsListViewModel @ViewModelInject constructor(
 
     override fun onAssetClicked(asset: Asset) {
         navigation.value = AssetsListFragmentDirections.toAsset(asset)
-    }
-
-    override fun onRetryClicked() {
-        adapter?.retry()
     }
 }

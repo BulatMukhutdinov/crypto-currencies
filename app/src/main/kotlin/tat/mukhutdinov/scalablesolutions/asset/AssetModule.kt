@@ -11,6 +11,8 @@ import tat.mukhutdinov.scalablesolutions.asset.domain.boundary.AssetDomain
 import tat.mukhutdinov.scalablesolutions.asset.domain.boundary.AssetGateway
 import tat.mukhutdinov.scalablesolutions.asset.gateway.AssetRemoteGateway
 import tat.mukhutdinov.scalablesolutions.asset.gateway.boundary.AssetApi
+import java.text.NumberFormat
+import java.util.Locale
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -31,5 +33,9 @@ abstract class AssetsListModule {
         @Provides
         fun provideAssetApi(retrofit: Retrofit): AssetApi =
             retrofit.create(AssetApi::class.java)
+
+        @Provides
+        fun provideNumberFormat(): NumberFormat =
+            NumberFormat.getNumberInstance(Locale.getDefault())
     }
 }

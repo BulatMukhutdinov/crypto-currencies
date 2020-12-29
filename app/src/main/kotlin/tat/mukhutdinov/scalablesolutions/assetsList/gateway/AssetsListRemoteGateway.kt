@@ -30,7 +30,7 @@ class AssetsListRemoteGateway @Inject constructor(
             val response = api.fetchAssetsList(limit = params.loadSize, page = page)
 
             if (response.data == null) {
-                throw RuntimeException("Failed to fetch assets list. Error code = ${response.errorCode}")
+                throw RuntimeException("${response.status?.errorMessage} Error code = ${response.status?.errorCode}")
             }
 
             val assets = response.data.map(converter::convert)

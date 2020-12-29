@@ -15,6 +15,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.color.MaterialColors
 import dagger.hilt.android.AndroidEntryPoint
 import tat.mukhutdinov.scalablesolutions.R
+import tat.mukhutdinov.scalablesolutions.asset.domain.model.AssetTimeSeries
 import tat.mukhutdinov.scalablesolutions.asset.domain.model.OfficialLink
 import tat.mukhutdinov.scalablesolutions.asset.ui.chart.DateFormatter
 import tat.mukhutdinov.scalablesolutions.asset.ui.chart.PriceMarkerView
@@ -34,6 +35,20 @@ class AssetFragment : BaseFragment<AssetBinding>() {
         setupLinks()
 
         setupTimeSeries()
+
+        setupLoading()
+    }
+
+    private fun setupLoading() {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                viewBinding.error.container.isVisible = false
+
+                viewBinding.loading.show()
+            } else {
+                viewBinding.loading.hide()
+            }
+        }
     }
 
     private fun setupTimeSeries() {
@@ -61,19 +76,29 @@ class AssetFragment : BaseFragment<AssetBinding>() {
 
     private fun observeEntries() {
         viewModel.timeSeries.observe(viewLifecycleOwner) {
-            val entries = mutableListOf<Entry>()
-
-            it.forEach { timeSeries ->
-                entries.add(Entry(timeSeries.date, timeSeries.price))
-            }
-
-            viewBinding.timeSeries.data = createLineData(entries)
-
-            viewBinding.progress.hide()
-            viewBinding.timeSeries.isVisible = true
-
-            viewBinding.timeSeries.invalidate()
+            it.fold(::onLoadSuccess, ::onLoadFail)
         }
+    }
+
+    private fun onLoadSuccess(data: List<AssetTimeSeries>) {
+        viewBinding.error.container.isVisible = false
+
+        val entries = mutableListOf<Entry>()
+
+        data.forEach { timeSeries ->
+            entries.add(Entry(timeSeries.date, timeSeries.price))
+        }
+
+        viewBinding.emptyTimeSeries.isVisible = entries.isEmpty()
+        viewBinding.timeSeries.isVisible = entries.isNotEmpty()
+
+        viewBinding.timeSeries.data = createLineData(entries)
+        viewBinding.timeSeries.invalidate()
+    }
+
+    private fun onLoadFail(throwable: Throwable) {
+        viewBinding.error.container.isVisible = true
+        viewBinding.error.message.text = throwable.localizedMessage
     }
 
     private fun createLineData(entries: List<Entry>): LineData {

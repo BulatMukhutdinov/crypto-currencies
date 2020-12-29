@@ -15,7 +15,7 @@ class AssetRemoteGateway @Inject constructor(
         val response = api.fetchTimeSeries(assetId = assetId, start = startDate)
 
         if (response.data == null) {
-            throw RuntimeException("Failed to fetch time series for asset id = $assetId. Error code = ${response.errorCode}")
+            throw RuntimeException("${response.status?.errorMessage} Error code = ${response.status?.errorCode}")
         }
 
         val timeSeries = response.data
