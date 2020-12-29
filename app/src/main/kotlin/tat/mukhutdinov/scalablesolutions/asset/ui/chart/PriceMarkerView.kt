@@ -8,7 +8,6 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
 import tat.mukhutdinov.scalablesolutions.R
-import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -22,10 +21,8 @@ class PriceMarkerView(context: Context, layoutId: Int) : MarkerView(context, lay
     private val dataFormat = SimpleDateFormat("dd MMM", Locale.getDefault())
     private val d = Date()
 
-    private val numberFormat = NumberFormat.getNumberInstance(Locale.getDefault())
-
     override fun refreshContent(entry: Entry, highlight: Highlight?) {
-        price.text = "$${numberFormat.format(entry.y)}"
+        price.text = "$${entry.y}"
 
         d.time = entry.x.toLong()
         date.text = dataFormat.format(d)

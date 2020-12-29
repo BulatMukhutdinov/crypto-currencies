@@ -1,4 +1,4 @@
-package tat.mukhutdinov.scalablesolutions.infrastructure.util
+package tat.mukhutdinov.scalablesolutions.infrastructure.interceptor
 
 import com.google.gson.Gson
 import okhttp3.Interceptor

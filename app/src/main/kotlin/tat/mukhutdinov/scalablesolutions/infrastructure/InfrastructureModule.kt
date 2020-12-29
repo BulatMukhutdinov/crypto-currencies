@@ -9,7 +9,9 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import tat.mukhutdinov.scalablesolutions.infrastructure.util.ErrorParserInterceptor
+import tat.mukhutdinov.scalablesolutions.infrastructure.interceptor.ErrorParserInterceptor
+import java.text.NumberFormat
+import java.util.Locale
 import javax.inject.Singleton
 
 @Module
@@ -41,8 +43,11 @@ abstract class InfrastructureModule {
                 .build()
 
         @Provides
-        @Singleton
         fun provideGson(): Gson =
             Gson()
+
+        @Provides
+        fun provideNumberFormat(): NumberFormat =
+            NumberFormat.getCurrencyInstance(Locale.US)
     }
 }
