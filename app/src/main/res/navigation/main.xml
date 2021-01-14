@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/assetsList"
-        android:name="tat.mukhutdinov.scalablesolutions.assetsList.ui.AssetsListFragment"
+        android:name="tat.mukhutdinov.cryptostock.assetsList.ui.AssetsListFragment"
         android:label="Assets List"
         tools:layout="@layout/assets_list">
 
@@ -22,12 +22,12 @@
 
     <fragment
         android:id="@+id/asset"
-        android:name="tat.mukhutdinov.scalablesolutions.asset.ui.AssetFragment"
+        android:name="tat.mukhutdinov.cryptostock.asset.ui.AssetFragment"
         android:label="Asset"
         tools:layout="@layout/asset">
 
         <argument
             android:name="asset"
-            app:argType="tat.mukhutdinov.scalablesolutions.asset.domain.model.Asset" />
+            app:argType="tat.mukhutdinov.cryptostock.asset.domain.model.Asset" />
     </fragment>
 </navigation>

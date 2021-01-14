@@ -12,7 +12,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "tat.mukhutdinov.scalablesolutions"
+        applicationId "tat.mukhutdinov.cryptostock"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1

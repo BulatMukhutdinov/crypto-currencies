@@ -8,11 +8,11 @@
 
         <variable
             name="asset"
-            type="tat.mukhutdinov.scalablesolutions.asset.domain.model.Asset" />
+            type="tat.mukhutdinov.cryptostock.asset.domain.model.Asset" />
 
         <variable
             name="bindings"
-            type="tat.mukhutdinov.scalablesolutions.assetsList.ui.boundary.AssetsListBindings" />
+            type="tat.mukhutdinov.cryptostock.assetsList.ui.boundary.AssetsListBindings" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

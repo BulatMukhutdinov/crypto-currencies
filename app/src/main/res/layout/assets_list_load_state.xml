@@ -7,7 +7,7 @@
 
         <variable
             name="bindings"
-            type="tat.mukhutdinov.scalablesolutions.assetsList.ui.boundary.AssetsListBindings" />
+            type="tat.mukhutdinov.cryptostock.assetsList.ui.boundary.AssetsListBindings" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

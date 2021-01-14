@@ -8,7 +8,7 @@
 
         <variable
             name="bindings"
-            type="tat.mukhutdinov.scalablesolutions.asset.ui.boundary.AssetBindings" />
+            type="tat.mukhutdinov.cryptostock.asset.ui.boundary.AssetBindings" />
     </data>
 
     <ScrollView

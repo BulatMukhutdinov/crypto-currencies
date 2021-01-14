@@ -7,7 +7,7 @@
 
         <variable
             name="bindings"
-            type="tat.mukhutdinov.scalablesolutions.infrastructure.structure.ui.boundary.ErrorBindings" />
+            type="tat.mukhutdinov.cryptostock.infrastructure.structure.ui.boundary.ErrorBindings" />
     </data>
 
     <LinearLayout
